@@ -3,20 +3,12 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 
-void login() {
-  SharedPreferences.getInstance().then((prefs) {
-    String name = prefs.getString("name")!;
-
-    scanQrCode(name, "Log In");
-  });
+void login(String name) {
+  scanQrCode(name, "Log In");
 }
 
-void logout() {
-  SharedPreferences.getInstance().then((prefs) {
-    String name = prefs.getString("name")!;
-
-    scanQrCode(name, "Log Out");
-  });
+void logout(String name) {
+  scanQrCode(name, "Log Out");
 }
 
 void breakTime() {
@@ -42,8 +34,17 @@ Future<void> scanQRCodeApp() async {
     String? qrData = await scanner.scan();
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    
+    if (!prefs.containsKey("login")) {
+      // if (prefs.containsKey("break")) {
+      //   breakTime();
+      // } else {
+      logout(prefs.getString("name")!);
 
+      // }
+    } else {
+      prefs.setString("login", "Log In");
+      login(prefs.getString("name")!);
+    }
   } else {
     await Permission.camera.request();
   }
