@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:officeproject/screens/attandacereport.dart';
+import 'package:officeproject/src/attandacereport.dart';
 
 
 class searchEmployee extends StatefulWidget {

@@ -4,23 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
-import 'homescreen.dart';
+import '../home/homescreen.dart';
 
-
-class splashScreen extends StatefulWidget {
-  const splashScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<splashScreen> createState() => _splashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _splashScreenState extends State<splashScreen> {
+class _SplashScreenState extends State<SplashScreen> {
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 4), () {
-      Get.to(HomePage());
+    Timer(const Duration(seconds: 4), () {
+      Get.to(const HomePage());
     });
   }
 
@@ -31,7 +30,7 @@ class _splashScreenState extends State<splashScreen> {
         child: Container(
           width: Get.width,
           height: Get.height * 0.3,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/office_logo.png"),
                   filterQuality: FilterQuality.high,

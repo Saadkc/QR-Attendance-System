@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'screens/splash_screen.dart';
+import 'src/splash Screen/splash_screen.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Attandance App',
-      home: splashScreen(),
+      home: SplashScreen(),
     );
   }
 }

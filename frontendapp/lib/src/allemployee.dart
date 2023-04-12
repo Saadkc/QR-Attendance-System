@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
-import 'package:officeproject/screens/employeedata.dart';
+import 'package:officeproject/src/employeedata.dart';
 
 class allEmployeeScreen extends StatefulWidget {
   const allEmployeeScreen({super.key});

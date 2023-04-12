@@ -38,6 +38,7 @@ class _newEmployeeSignINState extends State<newEmployeeSignIN> {
     //   snackPosition: SnackPosition.BOTTOM);
     // }
   }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
