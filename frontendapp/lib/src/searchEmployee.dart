@@ -1,7 +1,4 @@
 
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
@@ -30,14 +27,14 @@ class _searchEmployeeState extends State<searchEmployee> {
         )
         .get();*/
     _query == query.trim();
-    final result = await FirebaseFirestore.instance
-        .collection('attandance')
-        .orderBy("id")
-        .startAt([query]).endAt([query + '\uf8ff']).get();
-    setState(() {
-      search = result.docs.map((e) => e.data()).toList();
-      emloyee.add(search);
-    });
+    // final result = await FirebaseFirestore.instance
+    //     .collection('attandance')
+    //     .orderBy("id")
+    //     .startAt([query]).endAt([query + '\uf8ff']).get();
+    // setState(() {
+    //   search = result.docs.map((e) => e.data()).toList();
+    //   emloyee.add(search);
+    // });
   }
 
   @override

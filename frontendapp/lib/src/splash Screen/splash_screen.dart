@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../home/homescreen.dart';
 
@@ -18,6 +19,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    SharedPreferences.getInstance().then((value) {
+      value.setString("name", "fahad");
+    });
     Timer(const Duration(seconds: 4), () {
       Get.to(const HomePage());
     });

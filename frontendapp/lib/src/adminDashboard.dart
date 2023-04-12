@@ -57,7 +57,7 @@ class _admindashboardState extends State<admindashboard> {
                 ),
               ),
               GestureDetector(
-                onTap: () => Get.to(allEmployeeScreen()),
+                onTap: () {},
                 child: Card(
                   elevation: 10,
                   child: Center(

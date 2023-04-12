@@ -1,8 +1,7 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:officeproject/data/mark_attandence.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:flutter/material.dart';
@@ -25,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   DateTime now = DateTime.now();
-  final firebase = FirebaseFirestore.instance;
+  // final firebase = FirebaseFirestore.instance;
 
   // var status = "In";
   var present = 0;
@@ -79,19 +78,19 @@ class _HomePageState extends State<HomePage> {
   //     log("catch error : $e");
   //   }
   // }
-  void getData() async {
-    try {
-      var response =
-          await http.get(Uri.parse("http://192.168.0.219:3000/attendance"));
-      if (response.statusCode == 200) {
-        print(response.body);
-      } else {
-        print(response.statusCode);
-      }
-    } catch (e) {
-      print("error : $e");
-    }
-  }
+  // void getData() async {
+  //   try {
+  //     var response =
+  //         await http.get(Uri.parse("http://192.168.0.219:3000/attendance"));
+  //     if (response.statusCode == 200) {
+  //       print(response.body);
+  //     } else {
+  //       print(response.statusCode);
+  //     }
+  //   } catch (e) {
+  //     print("error : $e");
+  //   }
+  // }
 
   // void qrscanner() async {
   //   try {
@@ -123,131 +122,131 @@ class _HomePageState extends State<HomePage> {
   //   }
   // }
 
-  void checkbreak() async {
-    log("checkbreak method");
-    log('updated');
+  // void checkbreak() async {
+  //   log("checkbreak method");
+  //   log('updated');
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String loginTimeStr = prefs.getString("loginTime")!;
-    String docId = prefs.getString("docId")!;
-    DateTime currentTime = DateTime.now();
-    Duration timeDifference =
-        currentTime.difference(DateTime.parse(loginTimeStr));
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String loginTimeStr = prefs.getString("loginTime")!;
+  //   String docId = prefs.getString("docId")!;
+  //   DateTime currentTime = DateTime.now();
+  //   Duration timeDifference =
+  //       currentTime.difference(DateTime.parse(loginTimeStr));
 
-    //  bool onBreak = prefs.getBool("breakStatus")!;
-    // log("onbreak value : $onBreak");
-    String? onBreak = prefs.getString("onbreak");
-    log("docId $docId");
-    //String breaktime = prefs.getString('breakCheckIn')!;
-    try {
-      log(onBreak.toString());
-      // ignore: unnecessary_null_comparison
-      if (onBreak == null) {
-        var data = json.encode({
-          "status": "break-CheckIn",
-          // "breakCheckIn": breaktime.toString(),
-          "breakCheckIn": DateTime.now().toString(),
-          "checkInDate": loginTimeStr.toString()
-        });
-        await http.put(Uri.parse("http://192.168.0.219:3000/attendance/$docId"),
-            body: data, headers: {'Content-Type': 'application/json'});
+  //   //  bool onBreak = prefs.getBool("breakStatus")!;
+  //   // log("onbreak value : $onBreak");
+  //   String? onBreak = prefs.getString("onbreak");
+  //   log("docId $docId");
+  //   //String breaktime = prefs.getString('breakCheckIn')!;
+  //   try {
+  //     log(onBreak.toString());
+  //     // ignore: unnecessary_null_comparison
+  //     if (onBreak == null) {
+  //       var data = json.encode({
+  //         "status": "break-CheckIn",
+  //         // "breakCheckIn": breaktime.toString(),
+  //         "breakCheckIn": DateTime.now().toString(),
+  //         "checkInDate": loginTimeStr.toString()
+  //       });
+  //       await http.put(Uri.parse("http://192.168.0.219:3000/attendance/$docId"),
+  //           body: data, headers: {'Content-Type': 'application/json'});
 
-        // prefs.setBool("breakStatus", false);
-        prefs.setString("onbreak", "yes");
-        log("break check In");
-        prefs.setString("breakCheckInTime", DateTime.now().toString());
-      } else {
-        log("You are already logged in!");
-        log("Time difference since last login: ${timeDifference.inHours} hours ${timeDifference.inMinutes} minute");
-        var data = json.encode({
-          "status": "break-CheckOut",
-          // "breakCheckIn": breaktime.toString(),
-          "breakCheckOut": DateTime.now().toString(),
-          "checkInDate": loginTimeStr.toString()
-        });
-        await http.put(Uri.parse("http://192.168.0.219:3000/attendance/$docId"),
-            body: data,
-            headers: {'Content-Type': 'application/json'}).then((value) {
-          //prefs.setString("breakCheckIn", DateTime.now().toString());
-        });
-        log("break check out");
-        prefs.setString("breakCheckOutTime", DateTime.now().toString());
-      }
-    } catch (e) {
-      log('checkBreak method : $e');
-    }
-  }
+  //       // prefs.setBool("breakStatus", false);
+  //       prefs.setString("onbreak", "yes");
+  //       log("break check In");
+  //       prefs.setString("breakCheckInTime", DateTime.now().toString());
+  //     } else {
+  //       log("You are already logged in!");
+  //       log("Time difference since last login: ${timeDifference.inHours} hours ${timeDifference.inMinutes} minute");
+  //       var data = json.encode({
+  //         "status": "break-CheckOut",
+  //         // "breakCheckIn": breaktime.toString(),
+  //         "breakCheckOut": DateTime.now().toString(),
+  //         "checkInDate": loginTimeStr.toString()
+  //       });
+  //       await http.put(Uri.parse("http://192.168.0.219:3000/attendance/$docId"),
+  //           body: data,
+  //           headers: {'Content-Type': 'application/json'}).then((value) {
+  //         //prefs.setString("breakCheckIn", DateTime.now().toString());
+  //       });
+  //       log("break check out");
+  //       prefs.setString("breakCheckOutTime", DateTime.now().toString());
+  //     }
+  //   } catch (e) {
+  //     log('checkBreak method : $e');
+  //   }
+  // }
 
-  void markattendance() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? qrData = await scanner.scan(); //this is open camera
-    log("marked attendance method");
-    try {
-      if (prefs.containsKey("status")) {
-        String docId = prefs.getString("docId")!;
-        String loginTimeStr = prefs.getString("loginTime")!;
+  // void markattendance() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String? qrData = await scanner.scan(); //this is open camera
+  //   log("marked attendance method");
+  //   try {
+  //     if (prefs.containsKey("status")) {
+  //       String docId = prefs.getString("docId")!;
+  //       String loginTimeStr = prefs.getString("loginTime")!;
 
-        DateTime currentTime = DateTime.now();
-        Duration timeDifference =
-            currentTime.difference(DateTime.parse(loginTimeStr));
+  //       DateTime currentTime = DateTime.now();
+  //       Duration timeDifference =
+  //           currentTime.difference(DateTime.parse(loginTimeStr));
 
-        if (timeDifference.inHours < 9) {
-          // prefs.setBool("breakStatus", true);
-          checkbreak();
-        } else {
-          var data = json.encode({
-            "status": "LogOff",
-            "checkInDate": loginTimeStr.toString(),
-            "checkOutDate": currentTime.toString()
-          });
-          await http.put(
-              Uri.parse("http://192.168.0.219:3000/attendance/$docId"),
-              body: data,
-              headers: {'Content-Type': 'application/json'});
+  //       if (timeDifference.inHours < 9) {
+  //         // prefs.setBool("breakStatus", true);
+  //         checkbreak();
+  //       } else {
+  //         var data = json.encode({
+  //           "status": "LogOff",
+  //           "checkInDate": loginTimeStr.toString(),
+  //           "checkOutDate": currentTime.toString()
+  //         });
+  //         await http.put(
+  //             Uri.parse("http://192.168.0.219:3000/attendance/$docId"),
+  //             body: data,
+  //             headers: {'Content-Type': 'application/json'});
 
-          log("logoff");
-          prefs.clear();
-        }
-      } else {
-        DateTime loginTime = DateTime.now();
-        var data = json.encode({
-          "employeeName": qrData.toString(),
-          "status": "LogIn",
-          "checkInDate": loginTime.toString(),
-          "breakCheckIn": prefs.getString('breakCheckInTime'),
-          "breakCheckOut": prefs.getString('breakCheckOutTime')
-        });
-        var response = await http.post(
-            Uri.parse("http://192.168.0.219:3000/attendance"),
-            body: data,
-            headers: {'Content-Type': 'application/json'});
-        var alp = json.decode(response.body);
-        var id = alp["atten"]["_id"].toString();
-        log(id);
+  //         log("logoff");
+  //         prefs.clear();
+  //       }
+  //     } else {
+  //       DateTime loginTime = DateTime.now();
+  //       var data = json.encode({
+  //         "employeeName": qrData.toString(),
+  //         "status": "LogIn",
+  //         "checkInDate": loginTime.toString(),
+  //         "breakCheckIn": prefs.getString('breakCheckInTime'),
+  //         "breakCheckOut": prefs.getString('breakCheckOutTime')
+  //       });
+  //       var response = await http.post(
+  //           Uri.parse("http://192.168.0.219:3000/attendance"),
+  //           body: data,
+  //           headers: {'Content-Type': 'application/json'});
+  //       var alp = json.decode(response.body);
+  //       var id = alp["atten"]["_id"].toString();
+  //       log(id);
 
-        log("login");
-        prefs.setString("status", "LogIn");
-        prefs.setString("docId", id);
-        prefs.setString("loginTime", loginTime.toString());
-      }
-    } catch (e) {
-      log("markattendance : $e");
-    }
-  }
+  //       log("login");
+  //       prefs.setString("status", "LogIn");
+  //       prefs.setString("docId", id);
+  //       prefs.setString("loginTime", loginTime.toString());
+  //     }
+  //   } catch (e) {
+  //     log("markattendance : $e");
+  //   }
+  // }
 
   void _qrscanner() async {
     var camerastatus = await Permission.camera.status; //check camera status
 
-    try {
-      if (camerastatus.isGranted) {
-        markattendance();
-      } else {
-        await Permission.camera.request();
-        markattendance();
-      }
-    } catch (e) {
-      log("error ${e.toString()}");
-    }
+    // try {
+    //   if (camerastatus.isGranted) {
+    //     markattendance();
+    //   } else {
+    //     await Permission.camera.request();
+    //     markattendance();
+    //   }
+    // } catch (e) {
+    //   log("error ${e.toString()}");
+    // }
   }
 
   @override
@@ -285,7 +284,7 @@ class _HomePageState extends State<HomePage> {
                   child: const Text("Login as Admin"),
                   onPressed: () {
                     // Get.to(const adminscreen());
-                    getData();
+                    // getData();
                   }),
             ),
           ),
@@ -296,8 +295,8 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.blue,
                   child: const Text("Attandance"),
                   onPressed: () {
-                    _qrscanner();
-                    // qrscanner();
+                    scanQRCodeApp();
+                    
                   }),
             ),
           ),

@@ -24,10 +24,10 @@ router.post('/scan', async (req, res) => {
 
     } else {
         if(break_time == null){
-            const result = dbQuery(`UPDATE attendance SET (break_time=CURRENT_TIMESTAMP, breakoff_time=${break_timeoff}, status=${status}) WHERE name=${name}`)
+            const result = dbQuery(`UPDATE attendance SET (breakoff_time=${break_timeoff}, status=${status}) WHERE name=${name}`)
             res.status(200).json({"status": "success", "message": "Attendance Updated successfully"});
         }else{
-            const result = dbQuery(`UPDATE attendance SET (break_time=${break_time}, breakoff_time=CURRENT_TIMESTAMP, status=${status}) WHERE name=${name}`)
+            const result = dbQuery(`UPDATE attendance SET (break_time=${break_time}, status=${status}) WHERE name=${name}`)
             res.status(200).json({"status": "success", "message": "Attendance Updated successfully"});
         }
     }
