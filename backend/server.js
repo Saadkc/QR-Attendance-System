@@ -1,7 +1,24 @@
-const http = require('http');
-
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const connection = require('./config/sql_config.js');
+const util = require('util');
+const cors = require('cors');
 const port = 3000;
-const app = require('./app');
-const server = http.createServer(app);
 
-server.listen(port,console.log('server created'))
+var dbQuery;
+dbQuery = util.promisify(connection.query).bind(connection);
+
+app.use(express.json());
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+app.use(cors());
+
+//-----------------APIs-----------------//
+
+
+
+
+
+
+app.listen(port,console.log('server created'))
