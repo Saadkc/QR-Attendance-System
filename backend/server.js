@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const connection = require('./config/sql_config.js');
 const util = require('util');
 const cors = require('cors');
+const qrscan = require('./api/scan_qr.js')
 const port = 3000;
 
 var dbQuery;
@@ -16,9 +17,7 @@ app.use(cors());
 
 //-----------------APIs-----------------//
 
-
-
-
+app.use("/api", qrscan);
 
 
 app.listen(port,console.log('server created'))
