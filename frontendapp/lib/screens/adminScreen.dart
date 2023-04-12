@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
@@ -15,7 +14,7 @@ class adminscreen extends StatefulWidget {
 }
 
 class _adminscreenState extends State<adminscreen> {
-  final _auth = FirebaseAuth.instance;
+  // final _auth = FirebaseAuth.instance;
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   login() async {
@@ -23,39 +22,39 @@ class _adminscreenState extends State<adminscreen> {
     String _email = email.text.trim();
     String pass = password.text.trim();
 
-    if (_email == '' || pass == '') {
-      print("please filled all the fileds");
-    } else {
-      try {
-        print("tryyyyyyyyyyyyyyyyyyyyyyyy");
+    // if (_email == '' || pass == '') {
+    //   print("please filled all the fileds");
+    // } else {
+    //   try {
+    //     print("tryyyyyyyyyyyyyyyyyyyyyyyy");
         // user signin krega email or pass se
-        UserCredential userCredential = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: _email, password: pass);
-        //agr email or pass empty nh hue to ye condition lgegi
-        if (userCredential != null) {
-          Get.snackbar("Congratz", "you are sucessfully login",
-              snackPosition: SnackPosition.BOTTOM,
-              backgroundColor: Colors.blue);
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => admindashboard()));
-          print("login");
-        }
-      } on FirebaseAuthException catch (ex) {
-        Get.snackbar("Error",ex.code.toString(),
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.redAccent);
-        print(ex.code.toString());
-      }
-    }
+      //   UserCredential userCredential = await FirebaseAuth.instance
+      //       .signInWithEmailAndPassword(email: _email, password: pass);
+      //   //agr email or pass empty nh hue to ye condition lgegi
+      //   if (userCredential != null) {
+      //     Get.snackbar("Congratz", "you are sucessfully login",
+      //         snackPosition: SnackPosition.BOTTOM,
+      //         backgroundColor: Colors.blue);
+      //     Navigator.push(context,
+      //         MaterialPageRoute(builder: (context) => admindashboard()));
+      //     print("login");
+      //   }
+      // } on FirebaseAuthException catch (ex) {
+      //   Get.snackbar("Error",ex.code.toString(),
+      //       snackPosition: SnackPosition.BOTTOM,
+      //       backgroundColor: Colors.redAccent);
+      //   print(ex.code.toString());
+      // }
+    // }
   }
 
   void signUp() async {
-    try {
-      await _auth.createUserWithEmailAndPassword(
-          email: "fahad2001@gmail.com", password: "fahad2001");
-    } on FirebaseAuthException catch (e) {
-      print(e.toString());
-    }
+    // try {
+    //   await _auth.createUserWithEmailAndPassword(
+    //       email: "fahad2001@gmail.com", password: "fahad2001");
+    // } on FirebaseAuthException catch (e) {
+    //   print(e.toString());
+    // }
   }
 
   @override

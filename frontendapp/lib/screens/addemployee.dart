@@ -1,7 +1,4 @@
 import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
@@ -49,7 +46,7 @@ class _addNewEmployeeState extends State<addNewEmployee> {
       String id,
       String _empId
       ) async {
-    final _db = FirebaseFirestore.instance;
+    // final _db = FirebaseFirestore.instance;
 
     String first_name = _first_name.text;
     String last_name = _last_name.text;
@@ -74,38 +71,38 @@ class _addNewEmployeeState extends State<addNewEmployee> {
           backgroundColor: Colors.red
         );
       } else {
-        var snapshot = await FirebaseStorage.instance
-            .ref()
-            .child("pictures")
-            .child(Uuid().v1())
-            .putFile(_imagefile);
+        // var snapshot = await FirebaseStorage.instance
+        //     .ref()
+        //     .child("pictures")
+        //     .child(Uuid().v1())
+        //     .putFile(_imagefile);
         //TaskSnapshot taskSnapshot =await  UploadTask;
-        String downloadurl = await snapshot.ref.getDownloadURL();
+        // String downloadurl = await snapshot.ref.getDownloadURL();
 //adding data here
-        _db
-            .collection("AllEmployee").doc(id)
-            .set({
-          "first_name": first_name,
-          "last_name": last_name,
-          "age": age,
-          "designation": designation,
-          "manager": manager,
-          "shift_time": shift_time,
-          "joining_date": joiningdate,
-          "image": downloadurl,
-          "employee_id":_empId
-        })
-            .then((value) => Get.snackbar("", "Employee Added",
-            backgroundColor: Colors.blue,
-            snackPosition: SnackPosition.BOTTOM),
+        // _db
+        //     .collection("AllEmployee").doc(id)
+        //     .set({
+        //   "first_name": first_name,
+        //   "last_name": last_name,
+        //   "age": age,
+        //   "designation": designation,
+        //   "manager": manager,
+        //   "shift_time": shift_time,
+        //   "joining_date": joiningdate,
+        //   // "image": downloadurl,
+        //   "employee_id":_empId
+        // })
+        //     .then((value) => Get.snackbar("", "Employee Added",
+        //     backgroundColor: Colors.blue,
+        //     snackPosition: SnackPosition.BOTTOM),
 
-        )
+        // )
 
-            .catchError((e) {
-          Get.snackbar("Error", e.toString(),
-              backgroundColor: Colors.redAccent,
-              snackPosition: SnackPosition.BOTTOM);
-        });
+        //     .catchError((e) {
+        //   Get.snackbar("Error", e.toString(),
+        //       backgroundColor: Colors.redAccent,
+        //       snackPosition: SnackPosition.BOTTOM);
+        // });
         setState(() {
           imagefile == null;
         });

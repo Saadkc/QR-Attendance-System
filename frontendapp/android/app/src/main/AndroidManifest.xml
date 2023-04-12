@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.tpattandencesystem">
+    package="com.example.officeproject">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="attandence_system"
+        android:label="officeproject"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

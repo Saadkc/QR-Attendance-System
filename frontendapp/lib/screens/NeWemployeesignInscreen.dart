@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -23,21 +22,21 @@ class _newEmployeeSignINState extends State<newEmployeeSignIN> {
 
     String _email = email.text.trim();
     String _password = password.text.trim();
-    try{
-      final _auth = FirebaseAuth.instance;
-      UserCredential userCredential=await  _auth.createUserWithEmailAndPassword(email: _email, password: _password );
+    // try{
+      // final _auth = FirebaseAuth.instance;
+      // UserCredential userCredential=await  _auth.createUserWithEmailAndPassword(email: _email, password: _password );
 
         //String id = user.user!.uid;
         //print(id);
-      print(userCredential.user!.uid);
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>addNewEmployee(
-           uid: userCredential.user!.uid
-        ))).then((value) => Get.snackbar("added",""));
+    //   print(userCredential.user!.uid);
+    //     Navigator.push(context, MaterialPageRoute(builder: (context)=>addNewEmployee(
+    //        uid: userCredential.user!.uid
+    //     ))).then((value) => Get.snackbar("added",""));
 
-    }on FirebaseAuthException catch(e){
-      Get.snackbar("error",e.toString(),
-      snackPosition: SnackPosition.BOTTOM);
-    }
+    // }on FirebaseAuthException catch(e){
+    //   Get.snackbar("error",e.toString(),
+    //   snackPosition: SnackPosition.BOTTOM);
+    // }
   }
   @override
   Widget build(BuildContext context) {

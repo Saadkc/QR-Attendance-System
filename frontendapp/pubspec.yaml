@@ -31,9 +31,6 @@ environment:
 dependencies:
   cloud_firestore: ^4.0.5
   cupertino_icons: ^1.0.2
-  firebase_auth: ^4.1.2
-  firebase_core: ^2.2.0
-  firebase_storage: ^11.0.6
   flutter:
     sdk: flutter
   get: ^4.6.5
@@ -44,6 +41,7 @@ dependencies:
   quiver: ^3.1.0
   shared_preferences: ^2.0.20
   uuid: ^3.0.7
+  http: ^0.13.5
 
 dev_dependencies:
 

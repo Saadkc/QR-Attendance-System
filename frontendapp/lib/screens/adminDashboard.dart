@@ -1,11 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-
 import 'NeWemployeesignInscreen.dart';
-import 'addemployee.dart';
 import 'allemployee.dart';
 import 'homescreen.dart';
 import 'searchEmployee.dart';
@@ -19,9 +15,9 @@ class admindashboard extends StatefulWidget {
 }
 
 class _admindashboardState extends State<admindashboard> {
-  final _auth = FirebaseAuth.instance;
+  // final _auth = FirebaseAuth.instance;
   void signout() async {
-    await _auth.signOut();
+    // await _auth.signOut();
     Get.to(HomePage());
   }
 
