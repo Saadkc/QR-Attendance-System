@@ -11,12 +11,8 @@ void logout(String name) {
   scanQrCode(name, "Log Out");
 }
 
-void breakTime() {
-  SharedPreferences.getInstance().then((prefs) {
-    String name = prefs.getString("name")!;
-
-    scanQrCode(name, "Break", breakTime: DateTime.now());
-  });
+void breakTime(String name) {
+  scanQrCode(name, "Break", breakTime: DateTime.now());
 }
 
 void breakTimeOff() {
@@ -33,17 +29,24 @@ Future<void> scanQRCodeApp() async {
   if (camerastatus.isGranted) {
     String? qrData = await scanner.scan();
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    DateTime dateTime = DateTime.now();
 
-    if (!prefs.containsKey("login")) {
-      // if (prefs.containsKey("break")) {
-      //   breakTime();
-      // } else {
-      logout(prefs.getString("name")!);
-
-      // }
+    if (prefs.containsKey("status")) {
+      String status = prefs.getString("status")!;
+      if (status == "Log In") {
+        breakTime(prefs.getString('name')!);
+        prefs.setString("status", "break");
+      } else if (status == "break") {
+        breakTimeOff();
+        prefs.setString("status", "break off");
+      } else {
+        logout(prefs.getString("name")!);
+        prefs.setString("status", "Log Out");
+      }
     } else {
-      prefs.setString("login", "Log In");
       login(prefs.getString("name")!);
+      prefs.setString("status", "Log In");
+      prefs.setString("time", dateTime.toString());
     }
   } else {
     await Permission.camera.request();
