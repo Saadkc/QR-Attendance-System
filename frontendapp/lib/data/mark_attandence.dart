@@ -3,7 +3,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 
-void login(String name) {
+void login(String name) async {
   scanQrCode(name, "Log In");
 }
 
@@ -12,14 +12,13 @@ void logout(String name) {
 }
 
 void breakTime(String name) {
-  scanQrCode(name, "Break", breakTime: DateTime.now());
+  scanQrCode(name, "Break");
 }
 
 void breakTimeOff() {
   SharedPreferences.getInstance().then((prefs) {
     String name = prefs.getString("name")!;
-
-    scanQrCode(name, "Break", breakTimeOff: DateTime.now());
+    scanQrCode(name, "Break-off");
   });
 }
 
@@ -38,10 +37,10 @@ Future<void> scanQRCodeApp() async {
         prefs.setString("status", "break");
       } else if (status == "break") {
         breakTimeOff();
-        prefs.setString("status", "break off");
+        prefs.setString("status", "break-off");
       } else {
+        prefs.remove('status');
         logout(prefs.getString("name")!);
-        prefs.setString("status", "Log Out");
       }
     } else {
       login(prefs.getString("name")!);

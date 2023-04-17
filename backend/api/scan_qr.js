@@ -7,29 +7,29 @@ var dbQuery;
 
 dbQuery = util.promisify(connection.query).bind(connection);
 
+router.get('/', (req, res) => {
+    res.send('Hello World!')
+});
+
 router.post('/scan', async (req, res) => {
 
     const name = req.body.name;
     const status = req.body.status;
-    const break_time = req.body.break_time;
-    const break_timeoff = req.body.break_timeoff;
-
-    if(status === "Log In"){
-        const result = dbQuery(`INSERT INTO attendance (login_time, name, status) VALUES (CURRENT_TIMESTAMP,?,?)`, [name, status])
-        res.status(200).json({"status": "success", "message": "Attendance added successfully"});
-
-    } else if(status === "Log Out"){
-        const result = dbQuery(`UPDATE attendance SET logout_time=CURRENT_TIMESTAMP, status="Log Out" WHERE name='${name}'`);
-        res.status(200).json({"status": "success", "message": "Attendance Updated successfully"});
-
+    const id = req.body.id;
+    console.log(status);
+    if (status === "Log In") {
+        const result = await dbQuery(`INSERT INTO attendance (login_time, name, status) VALUES (CURRENT_TIMESTAMP,?,?)`, [name, status]);
+        const getResult = await dbQuery(`SELECT * FROM attendance WHERE id='${result.insertId}'`);
+        res.status(200).json({ "status": "success", "data": getResult });
+    } else if (status === "Log Out") {
+        const result = dbQuery(`UPDATE attendance SET logout_time=CURRENT_TIMESTAMP, status="Log Out" WHERE id='${id}'`);
+        res.status(200).json({ "status": "success", "message": "Attendance Updated successfully" });
+    } else if (status === "Break-off") {
+        const result = dbQuery(`UPDATE attendance SET breakoff_time=CURRENT_TIMESTAMP, status="Break-off" WHERE id=${id}`)
+        res.status(200).json({ "status": "success", "message": "Attendance Updated successfully" });
     } else {
-        if(break_time == null){
-            const result = dbQuery(`UPDATE attendance SET (breakoff_time=${break_timeoff}, status=${status}) WHERE name=${name}`)
-            res.status(200).json({"status": "success", "message": "Attendance Updated successfully"});
-        }else{
-            const result = dbQuery(`UPDATE attendance SET (break_time=${break_time}, status=${status}) WHERE name=${name}`)
-            res.status(200).json({"status": "success", "message": "Attendance Updated successfully"});
-        }
+        const result = dbQuery(`UPDATE attendance SET break_time=CURRENT_TIMESTAMP, status="Break" WHERE id=${id}`)
+        res.status(200).json({ "status": "success", "message": "Attendance Updated successfully" });
     }
 
 });

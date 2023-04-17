@@ -282,7 +282,9 @@ class _HomePageState extends State<HomePage> {
               child: CupertinoButton(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: const Text("Login as Admin"),
-                  onPressed: () {
+                  onPressed: () async {
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    prefs.clear();
                     // Get.to(const adminscreen());
                     // getData();
                   }),
