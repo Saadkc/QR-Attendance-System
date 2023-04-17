@@ -33,15 +33,20 @@ Future<void> scanQRCodeApp() async {
     if (prefs.containsKey("status")) {
       String status = prefs.getString("status")!;
       if (status == "Log In") {
-        breakTime(prefs.getString('name')!);
-        prefs.setString("status", "break");
+        String time = prefs.getString("time")!;
+        DateTime loginTime = DateTime.parse(time);
+        if (dateTime.difference(loginTime).inHours >= 8) {
+          prefs.remove('status');
+          logout(prefs.getString("name")!);
+        } else {
+          breakTime(prefs.getString('name')!);
+          prefs.setString("status", "break");
+          prefs.setString("break-time", dateTime.toString());
+        }
       } else if (status == "break") {
         breakTimeOff();
         prefs.setString("status", "break-off");
-      } else {
-        prefs.remove('status');
-        logout(prefs.getString("name")!);
-      }
+      } 
     } else {
       login(prefs.getString("name")!);
       prefs.setString("status", "Log In");
