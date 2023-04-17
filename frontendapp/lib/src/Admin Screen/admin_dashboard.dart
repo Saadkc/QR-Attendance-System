@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'NeWemployeesignInscreen.dart';
-import 'allemployee.dart';
-import 'home/homescreen.dart';
-import 'searchEmployee.dart';
+import '../NeWemployeesignInscreen.dart';
+import '../home/homescreen.dart';
+import '../searchEmployee.dart';
 
 
-class admindashboard extends StatefulWidget {
-  const admindashboard({super.key});
+class AdminDashboard extends StatefulWidget {
+  const AdminDashboard({super.key});
 
   @override
-  State<admindashboard> createState() => _admindashboardState();
+  State<AdminDashboard> createState() => _AdminDashboardState();
 }
 
-class _admindashboardState extends State<admindashboard> {
+class _AdminDashboardState extends State<AdminDashboard> {
   // final _auth = FirebaseAuth.instance;
   void signout() async {
     // await _auth.signOut();
-    Get.to(HomePage());
+    Get.to(const HomePage());
   }
 
   @override
@@ -26,13 +25,13 @@ class _admindashboardState extends State<admindashboard> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("Admin Dashboard"),
+        title: const Text("Admin Dashboard"),
         actions: [
           IconButton(
               onPressed: () {
                 signout();
               },
-              icon: Icon(Icons.logout))
+              icon: const Icon(Icons.logout))
         ],
       ),
       body: Padding(
@@ -45,9 +44,9 @@ class _admindashboardState extends State<admindashboard> {
             children: [
               GestureDetector(
                 onTap: () {
-                  Get.to(searchEmployee());
+                  Get.to(const searchEmployee());
                 },
-                child: Card(
+                child: const Card(
                   elevation: 10,
                   child: Center(
                       child: Text(
@@ -58,7 +57,7 @@ class _admindashboardState extends State<admindashboard> {
               ),
               GestureDetector(
                 onTap: () {},
-                child: Card(
+                child: const Card(
                   elevation: 10,
                   child: Center(
                     child: Text("All employee",
@@ -67,8 +66,8 @@ class _admindashboardState extends State<admindashboard> {
                 ),
               ),
               GestureDetector(
-                onTap: () => Get.to(newEmployeeSignIN()),
-                child: Card(
+                onTap: () => Get.to(const newEmployeeSignIN()),
+                child: const Card(
                   elevation: 10,
                   child: Center(
                     child: Text("Add New \n employee",

@@ -9,6 +9,8 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
+import '../Admin Screen/admin_login.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -283,9 +285,9 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: const Text("Login as Admin"),
                   onPressed: () async {
-                    SharedPreferences prefs = await SharedPreferences.getInstance();
-                    prefs.clear();
-                    // Get.to(const adminscreen());
+                    // SharedPreferences prefs = await SharedPreferences.getInstance();
+                    // prefs.clear();
+                    Get.to(const AdminLogin());
                     // getData();
                   }),
             ),
